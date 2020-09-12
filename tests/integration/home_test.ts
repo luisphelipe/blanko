@@ -14,3 +14,13 @@ describe("GET /", () => {
     expect(res.body).to.eql({ message: `Using environment test` });
   });
 });
+
+describe("GET /home", () => {
+  it("Should return a basic page with Hey Test", async () => {
+    const res = await chai.request(app).get("/home");
+
+    expect(res).to.have.status(200);
+    expect(res).to.have.header("content-type", "text/html; charset=utf-8");
+    expect(res.text).to.contain("Hey Test");
+  });
+});
