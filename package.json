@@ -4,16 +4,19 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "NODE_ENV=test yarn migrate && mocha --exit -r ts-node/register ./tests/setup.ts './tests/**/*test.ts'",
-    "test_file": "NODE_ENV=test yarn migrate && mocha --exit -r ts-node/register ./tests/setup.ts",
-    "ci": "NODE_ENV=ci yarn migrate && mocha --exit -r ts-node/register ./tests/setup.ts './tests/**/*test.ts'",
+    "test": "yarn test_err 2>/dev/null",
+    "ci": "NODE_ENV=ci yarn test_file_script './tests/**/*test.ts'",
     "dev": "ts-node-dev --respawn --transpile-only --no-notify ./bin/wwwdev",
+    "build": "NODE_ENV=production yarn build_script",
+    "dev_build": "NODE_ENV=development yarn build_script",
+    "test_file_script": "yarn migrate && mocha --exit -r ts-node/register ./tests/setup.ts",
+    "build_script": "yarn run migrate && tsc && yarn run cpmigrations && yarn run cpmodels && yarn run cpconfig",
+    "test_err": "yarn test_file './tests/**/*test.ts'",
+    "test_file": "NODE_ENV=test yarn test_file_script",
     "cpmigrations": "cp -r migrations ./dist/migrations",
     "cpmodels": "cp -r models ./dist/models",
     "cpconfig": "cp -r config ./dist/config",
-    "migrate": "npx sequelize db:migrate",
-    "build": "NODE_ENV=production yarn run migrate && tsc && yarn run cpmigrations && yarn run cpmodels && yarn run cpconfig",
-    "dev_build": "NODE_ENV=development yarn run migrate && tsc && yarn run cpmigrations && yarn run cpmodels && yarn run cpconfig"
+    "migrate": "npx sequelize db:migrate"
   },
   "dependencies": {
     "chai": "^4.2.0",
