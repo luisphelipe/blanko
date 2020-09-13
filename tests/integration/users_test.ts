@@ -4,12 +4,20 @@ import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 
 import models from "../../models";
+import UserFactory from "../factories/user.factory";
+
+const User = models.User;
 
 chai.use(chaiHttp);
 
 describe("GET /users", () => {
-  it("Should render list of users");
-  it("List of users should be paginated");
+  it("Should render list of users with user and email");
+  it("List of users should have pagination links");
+
+  describe("Pagination", () => {
+    it("Each page should have 10 users");
+    it("Every next page should show the next 10 users");
+  });
 });
 
 describe("GET /users/new", () => {
@@ -26,6 +34,24 @@ describe("GET /users/new", () => {
 });
 
 describe("POST /users", () => {
-  it("Should create a new user");
-  it("Should redirect to list of users");
+  it("Should create a new user", async () => {
+    const data = UserFactory.build();
+    const userCount = await User.count();
+
+    const res = await chai.request(app).post("/users").send(data);
+
+    expect(res.error).to.eql(false);
+    expect(await User.count()).to.eql(userCount + 1);
+  });
+
+  it("Should redirect to list of users", async () => {
+    const data = UserFactory.build();
+
+    const res = await chai.request(app).post("/users").send(data);
+
+    expect(res.error).to.eql(false);
+    expect(res).to.redirectTo(/\/users$/);
+  });
+
+  it("Should redirect back to form with error and submited values");
 });

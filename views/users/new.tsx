@@ -8,6 +8,7 @@ import {
   Input,
   LinkButton,
   Button,
+  ErrorList,
 } from "../components";
 import DefaultLayout from "../layouts/default";
 
@@ -20,24 +21,29 @@ const styles = `
   }
 `;
 
-const New = () => {
+const New = ({ error, value }) => {
+  console.log(error.details.map((error) => error.message));
+
   return (
     <DefaultLayout title="Cadastro de Usuário" style={styles}>
       <CenteredContainer>
-        <Form>
+        <Form action="/users" method="POST">
           <Header>Cadastro de Usuário</Header>
           <FlexWrapper>
             <Label htmlFor="name">Nome</Label>
-            <Input id="name" name="name" type="text" />
+            <Input id="name" name="name" type="text" value={value.name} />
           </FlexWrapper>
           <FlexWrapper>
             <Label htmlFor="email">E-mail</Label>
-            <Input id="email" name="email" type="email" />
+            <Input id="email" name="email" type="email" value={value.email} />
           </FlexWrapper>
           <FlexWrapper>
             <LinkButton href="/users">Voltar</LinkButton>
             <Button type="submit">Enviar</Button>
           </FlexWrapper>
+          <ErrorList>
+            {error && error.details.map((error) => <li>{error.message}</li>)}
+          </ErrorList>
         </Form>
       </CenteredContainer>
     </DefaultLayout>

@@ -86,3 +86,7 @@ const button_mixin = {
 export const Button = style("button", button_mixin);
 
 export const LinkButton = style("a", button_mixin);
+
+export const ErrorList = style("ul", {
+  color: "red",
+});
