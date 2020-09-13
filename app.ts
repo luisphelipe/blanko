@@ -6,11 +6,12 @@ import cors from "cors";
 import reactEngine from "express-react-views";
 
 import indexRouter from "./routes/index";
+import userRouter from "./routes/user";
 
 var app = express();
 
 const ReactEngine = reactEngine.createEngine();
-// This doesn't work for development build
+// This doesn't work for dev build
 const react_extension = process.env.NODE_ENV === "production" ? "js" : "tsx";
 
 app.set("views", __dirname + "/views");
@@ -25,5 +26,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/", indexRouter);
+app.use("/users", userRouter);
 
 export default app;

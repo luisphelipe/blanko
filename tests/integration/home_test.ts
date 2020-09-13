@@ -3,8 +3,6 @@ import app from "../app";
 import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 
-import models from "../../models";
-
 chai.use(chaiHttp);
 
 describe("GET /", () => {
@@ -16,7 +14,7 @@ describe("GET /", () => {
 });
 
 describe("GET /home", () => {
-  it("Should return a basic page with Hey Test", async () => {
+  it('Should return a basic page with "Hey Test"', async () => {
     const res = await chai.request(app).get("/home");
 
     expect(res).to.have.status(200);
