@@ -14,7 +14,7 @@ describe("GET /", () => {
 });
 
 describe("GET /home", () => {
-  it('Should return a basic page with "Hey Test"', async () => {
+  it('Should render a basic page with "Hey Test"', async () => {
     const res = await chai.request(app).get("/home");
 
     expect(res).to.have.status(200);

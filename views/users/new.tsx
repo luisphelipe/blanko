@@ -6,6 +6,7 @@ import {
   FlexWrapper,
   Label,
   Input,
+  LinkButton,
   Button,
 } from "../components";
 import DefaultLayout from "../layouts/default";
@@ -33,7 +34,10 @@ const New = () => {
             <Label htmlFor="email">E-mail</Label>
             <Input id="email" name="email" type="email" />
           </FlexWrapper>
-          <Button type="submit">Enviar</Button>
+          <FlexWrapper>
+            <LinkButton href="/users">Voltar</LinkButton>
+            <Button type="submit">Enviar</Button>
+          </FlexWrapper>
         </Form>
       </CenteredContainer>
     </DefaultLayout>

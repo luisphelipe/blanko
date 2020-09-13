@@ -71,10 +71,18 @@ export const Input = style("input", {
   flexGrow: 1,
 });
 
-export const Button = style("button", {
+const button_mixin = {
   ...text_mixin,
   backgroundColor: "inherit",
   border: "1px solid black",
-  padding: "10px 60px",
+  padding: "10px",
+  textAlign: "center",
   cursor: "pointer",
-});
+  flexGrow: 1,
+  color: "inherit",
+  textDecoration: "none",
+};
+
+export const Button = style("button", button_mixin);
+
+export const LinkButton = style("a", button_mixin);
