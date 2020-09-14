@@ -1,11 +1,8 @@
 import Joi from "joi";
+import { name_type } from "./user_name.validator";
 
 const user_schema = Joi.object({
-  name: Joi.string()
-    .min(3)
-    .max(100)
-    .pattern(/^[A-z ]+$/)
-    .required(),
+  name: name_type,
   email: Joi.string().email().required(),
 });
 

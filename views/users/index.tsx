@@ -10,7 +10,7 @@ import {
   Tr,
   Th,
   Td,
-  Span,
+  Link,
 } from "./components";
 import DefaultLayout from "../layouts/default";
 import Pagination from "./Pagination";
@@ -65,11 +65,21 @@ const New = ({ users, page, count }) => {
                 <Td>
                   <FlexWrapper
                     style={{
-                      justifyContent: "center",
+                      justifyContent: "space-around",
                     }}
                   >
-                    <Span>1</Span>
-                    <Span>2</Span>
+                    <Link
+                      href={`/users/${user.id}/edit`}
+                      style={{ fontSize: "inherit" }}
+                    >
+                      E
+                    </Link>
+                    <Link
+                      href={`/users/${user.id}/delete`}
+                      style={{ fontSize: "inherit" }}
+                    >
+                      D*
+                    </Link>
                   </FlexWrapper>
                 </Td>
               </Tr>

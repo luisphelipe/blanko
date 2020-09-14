@@ -134,8 +134,6 @@ export const Tr = style("tr", {
   ...table_item_mixin,
 });
 
-export const Span = style("span", { margin: "0 auto" });
-
 export const Td = style("td", { ...table_mixin, ...table_item_mixin });
 
 export const Link = style("a", {
