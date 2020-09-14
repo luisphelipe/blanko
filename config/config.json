@@ -16,6 +16,9 @@
     "logging": false
   },
   "ci": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "postgres",
     "dialect": "postgres"
   },
   "production": {
