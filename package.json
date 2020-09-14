@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "ts-node-dev --respawn --transpile-only --no-notify ./bin/wwwdev",
     "test": "yarn run test_file './tests/**/*test.ts'",
-    "ci": "NODE_ENV=ci yarn run test",
+    "ci": "NODE_ENV=ci yarn run test_file_script './tests/**/*test.ts'",
     "build": "NODE_ENV=production yarn run build_script",
     "test_silent": "yarn run test 2>/dev/null",
     "dev_build": "NODE_ENV=development yarn run build_script",
