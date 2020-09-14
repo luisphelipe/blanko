@@ -41,7 +41,9 @@ const New = ({ error, value = {} }: { error: any; value: any }) => {
           </FlexWrapper>
           <ErrorList>
             {error
-              ? error.details.map((error) => <li>{error.message}</li>)
+              ? error.details.map((error) => (
+                  <li key={error.message}>{error.message}</li>
+                ))
               : undefined}
           </ErrorList>
         </Form>

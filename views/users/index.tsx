@@ -71,12 +71,14 @@ const New = ({ users, page, count }) => {
                     <Link
                       href={`/users/${user.id}/edit`}
                       style={{ fontSize: "inherit" }}
+                      title="Edit"
                     >
                       E
                     </Link>
                     <Link
                       href={`/users/${user.id}/delete`}
                       style={{ fontSize: "inherit" }}
+                      title="Delete without confirmation"
                     >
                       D*
                     </Link>

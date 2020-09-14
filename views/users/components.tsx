@@ -101,7 +101,6 @@ export const Column = style("div", {
 });
 
 const table_mixin = {
-  width: "10px",
   border: "1px solid black",
 };
 
@@ -125,7 +124,7 @@ const table_item_mixin = {
   overflow: "hidden",
   whiteSpace: "nowrap",
   textOverflow: "ellipsis",
-  // Hack to control table data width by the table header width
+  // Hack to control td width by the th width
   maxWidth: "1px",
 };
 
