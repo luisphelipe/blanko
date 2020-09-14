@@ -9,7 +9,7 @@ import {
   LinkButton,
   Button,
   ErrorList,
-} from "../components";
+} from "./components";
 import DefaultLayout from "../layouts/default";
 
 // This is necessary since media queries are not natively supported on React
@@ -21,9 +21,7 @@ const styles = `
   }
 `;
 
-const New = ({ error, value }) => {
-  console.log(error.details.map((error) => error.message));
-
+const New = ({ error, value = {} }: { error: any; value: any }) => {
   return (
     <DefaultLayout title="Cadastro de Usuário" style={styles}>
       <CenteredContainer>
@@ -42,7 +40,9 @@ const New = ({ error, value }) => {
             <Button type="submit">Enviar</Button>
           </FlexWrapper>
           <ErrorList>
-            {error && error.details.map((error) => <li>{error.message}</li>)}
+            {error
+              ? error.details.map((error) => <li>{error.message}</li>)
+              : undefined}
           </ErrorList>
         </Form>
       </CenteredContainer>

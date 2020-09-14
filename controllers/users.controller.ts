@@ -14,6 +14,15 @@ export const create = async (req, res, next) => {
   const { error, value } = user_validator.validate(req.body);
   if (error) return res.status(406).render("users/new", { error, value });
 
+  const user = await User.findOne({ where: { email: value.email } });
+
+  if (user) {
+    const err = { details: [{ message: "E-mail já cadastrado." }] };
+
+    // Ideally I should redirect instead of rendering
+    return res.status(406).render("users/new", { error: err, value });
+  }
+
   await User.create(value);
 
   return res.redirect("/users");
