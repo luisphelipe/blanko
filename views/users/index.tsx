@@ -13,21 +13,45 @@ import {
   Span,
 } from "./components";
 import DefaultLayout from "../layouts/default";
+import Pagination from "./Pagination";
 
 // This is necessary since media queries are not natively supported on React
 const styles = `
-    button {
-      align-self: center;
+  button {
+    align-self: center;
+  }
+
+  @media (max-width: 671px) {
+    #header-wrapper {
+      justify-content: center !important;
+    }
+
+    #header-wrapper > * {
+      max-width: 100%;
     }
   }
 `;
 
-const New = ({ users }) => {
+const New = ({ users, page, count }) => {
   return (
     <DefaultLayout title="Lista de Usuários" style={styles}>
       <CenteredContainer>
         <Column>
-          <Header>Lista de Usuários</Header>
+          <FlexWrapper
+            id="header-wrapper"
+            style={{
+              maxWidth: "min(100%, 900px)",
+              justifyContent: "space-between",
+            }}
+          >
+            <Header>Lista de Usuários</Header>
+            <LinkButton
+              href="/users/new"
+              style={{ fontSize: "20px", alignSelf: "left", maxWidth: "300px" }}
+            >
+              Cadastrar novo Usuário
+            </LinkButton>
+          </FlexWrapper>
           <Table>
             <Tr>
               <Th style={{ width: "35%" }}>Nome</Th>
@@ -51,14 +75,11 @@ const New = ({ users }) => {
               </Tr>
             ))}
           </Table>
-          <FlexWrapper style={{ justifyContent: "center" }}>
-            {"<< < 1 ... 3 4 5 ... 7 > >>"}
-          </FlexWrapper>
-          <FlexWrapper>
-            <LinkButton href="/users/new" style={{ fontSize: "20px" }}>
-              Cadastrar novo Usuário
-            </LinkButton>
-          </FlexWrapper>
+          <Pagination
+            url="/users"
+            page={parseInt(page)}
+            count={parseInt(count)}
+          />
         </Column>
       </CenteredContainer>
     </DefaultLayout>

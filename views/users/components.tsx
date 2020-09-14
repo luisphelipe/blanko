@@ -1,18 +1,6 @@
 // import styled, { css } from "styled-components";
 import React from "react";
-
-// LMAO
-// First time trying to work with React SSR
-// And styled-components didn't work
-// I should probably just write css (or learn how to use styled-components with SSR)
-// But where is the fun of that? 👀
-const style = (Component: string, css: any) => {
-  return ({ children, style, ...rest }: any) => (
-    <Component style={{ ...css, ...style }} {...rest}>
-      {children}
-    </Component>
-  );
-};
+import style from "../style";
 
 // Shared components
 
@@ -101,10 +89,12 @@ export const Button = style("button", button_mixin);
 
 // Components for /index.tsx
 
+dimensions_mixin.maxWidth = "min(100%, 900px)";
+
 export const Column = style("div", {
   ...flex_column_mixin,
   ...dimensions_mixin,
-  alignItems: "flex-end",
+  alignItems: "center",
   justifyContent: "space-between",
   maxHeight: "min(100vh, 500px)",
   overflow: "auto",
@@ -133,6 +123,7 @@ const table_item_mixin = {
   padding: "5px",
   fontSize: "13px",
   overflow: "hidden",
+  whiteSpace: "nowrap",
   textOverflow: "ellipsis",
   // Hack to control table data width by the table header width
   maxWidth: "1px",
@@ -143,8 +134,16 @@ export const Tr = style("tr", {
   ...table_item_mixin,
 });
 
-export const Span = style("span", {
-  margin: "0 5px",
-});
+export const Span = style("span", { margin: "0 auto" });
 
 export const Td = style("td", { ...table_mixin, ...table_item_mixin });
+
+export const Link = style("a", {
+  ...text_mixin,
+  fontSize: "16px",
+});
+
+export const FakeLink = style("span", {
+  ...text_mixin,
+  fontSize: "16px",
+});

@@ -3,10 +3,22 @@ import models from "../models";
 
 const User = models.User;
 
+const paginate = ({ page = 1, limit = 10 }) => ({
+  limit,
+  offset: (page - 1) * limit,
+});
+
 export const list = async (req, res, next) => {
-  // TODO: paginate
-  const users = await User.findAll({});
-  return res.render("users", { users });
+  const users = await User.findAll({
+    attributes: ["email", "name"],
+    raw: true,
+    order: [["updatedAt", "DESC"]],
+    ...paginate(req.query),
+  });
+
+  const count = await User.count();
+
+  return res.render("users", { users, page: req.query.page || 1, count });
 };
 
 export const create = async (req, res, next) => {
