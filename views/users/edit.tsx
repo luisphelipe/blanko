@@ -23,7 +23,7 @@ const styles = `
 
 const New = ({ user, error, value = {} }: any) => {
   return (
-    <DefaultLayout title="Cadastro de Usuário" style={styles}>
+    <DefaultLayout title="Edição de Usuário" style={styles}>
       <CenteredContainer>
         <Form action={`/users/${user.id}`} method="POST">
           <Header>Edição de Usuário</Header>
